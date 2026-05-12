@@ -10,7 +10,7 @@ This project is an AI-powered interview assistant designed to help users improve
 
 It combines **Speech Recognition, Natural Language Processing (NLP), and Computer Vision** to evaluate user responses and provide structured feedback.
 
----
+--- 
 
 ## ✨ Features
 
