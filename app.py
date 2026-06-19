@@ -6,12 +6,44 @@ import cv2
 import os
 import random
 
+# ✅ NEW: DATABASE IMPORT
+import sqlite3
+
 app = Flask(__name__)
 app.secret_key = "secret123"
 
 
 # 🔐 Simple in-memory users (no DB)
 users = {}
+
+
+# ✅ NEW: INIT DATABASE
+def init_db():
+    conn = sqlite3.connect("interview.db")
+    c = conn.cursor()
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            password TEXT
+        )
+    """)
+
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS results (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT,
+            score REAL,
+            emotion TEXT,
+            sentiment TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 
 # 🔐 REGISTER
@@ -23,6 +55,14 @@ def register():
 
         if username and password:
             users[username] = password
+
+            # ✅ NEW: SAVE TO DATABASE
+            conn = sqlite3.connect("interview.db")
+            c = conn.cursor()
+            c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            conn.commit()
+            conn.close()
+
             return redirect('/login')
 
     return render_template("register.html")
@@ -35,7 +75,19 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
+        # ✅ OLD LOGIC (UNCHANGED)
         if username in users and users[username] == password:
+            session['user'] = username
+            return redirect('/')
+
+        # ✅ NEW: CHECK FROM DATABASE
+        conn = sqlite3.connect("interview.db")
+        c = conn.cursor()
+        c.execute("SELECT * FROM users WHERE username=? AND password=?", (username, password))
+        user = c.fetchone()
+        conn.close()
+
+        if user:
             session['user'] = username
             return redirect('/')
 
@@ -76,17 +128,20 @@ def interview_analysis():
     if request.method == 'POST':
         try:
             audio = request.files.get('audio')
+            print("Uploaded audio:", audio.filename)
             video = request.files.get('video')
 
             if not audio or not video:
                 return "Please upload both audio and video files."
 
-            audio_path = "audio.wav"
-            video_path = "video.mp4"
+            audio_path = audio.filename
+            video_path = video.filename
 
             audio.save(audio_path)
             video.save(video_path)
 
+            print("Uploaded Audio:", audio_path)
+            print("Uploaded Video:", video_path)
             print("Files uploaded successfully")
 
             text = speech_to_text(audio_path)
@@ -112,6 +167,16 @@ def interview_analysis():
 
             print("Final Score:", final_score)
 
+            # ✅ NEW: SAVE RESULT TO DATABASE
+            conn = sqlite3.connect("interview.db")
+            c = conn.cursor()
+            c.execute(
+                "INSERT INTO results (username, score, emotion, sentiment) VALUES (?, ?, ?, ?)",
+                (session['user'], final_score, emotion, sentiment)
+            )
+            conn.commit()
+            conn.close()
+
             return render_template(
                 "result.html",
                 text=text,
@@ -131,6 +196,27 @@ def interview_analysis():
 
 
 # 🚀 Run App
+@app.route('/analytics')
+def analytics():
+
+    if 'user' not in session:
+        return redirect('/login')
+
+    return render_template("analytics.html")
+@app.route('/coach')
+def coach():
+
+    if 'user' not in session:
+        return redirect('/login')
+
+    return render_template("coach.html")
+@app.route('/reports')
+def reports():
+
+    if 'user' not in session:
+        return redirect('/login')
+
+    return render_template("reports.html")
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=True)
