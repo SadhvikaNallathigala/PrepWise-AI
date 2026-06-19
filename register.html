@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PrepWise AI | Register</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f172a,#1e293b,#2563eb);
+overflow:hidden;
+}
+
+body::before{
+content:'';
+position:absolute;
+width:500px;
+height:500px;
+background:#3b82f6;
+border-radius:50%;
+top:-200px;
+left:-150px;
+filter:blur(150px);
+opacity:0.4;
+}
+
+body::after{
+content:'';
+position:absolute;
+width:400px;
+height:400px;
+background:#8b5cf6;
+border-radius:50%;
+bottom:-150px;
+right:-100px;
+filter:blur(150px);
+opacity:0.4;
+}
+
+.container{
+width:950px;
+max-width:95%;
+height:600px;
+display:flex;
+border-radius:30px;
+overflow:hidden;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+box-shadow:0 15px 50px rgba(0,0,0,0.4);
+z-index:10;
+}
+
+.left-panel{
+flex:1;
+padding:60px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+color:white;
+}
+
+.logo{
+font-size:42px;
+font-weight:700;
+margin-bottom:15px;
+}
+
+.tagline{
+font-size:20px;
+font-weight:500;
+margin-bottom:20px;
+color:#dbeafe;
+}
+
+.description{
+font-size:15px;
+line-height:1.8;
+color:#cbd5e1;
+}
+
+.feature-box{
+margin-top:30px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.feature{
+background:rgba(255,255,255,0.1);
+padding:15px;
+border-radius:15px;
+font-size:14px;
+}
+
+.right-panel{
+width:400px;
+background:white;
+padding:50px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+}
+
+.right-panel h2{
+font-size:30px;
+color:#0f172a;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#64748b;
+margin-bottom:25px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:8px;
+font-size:14px;
+font-weight:500;
+color:#334155;
+}
+
+.input-group input{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #cbd5e1;
+outline:none;
+font-size:15px;
+transition:0.3s;
+}
+
+.input-group input:focus{
+border-color:#2563eb;
+box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+}
+
+.password-box{
+position:relative;
+}
+
+.password-box button{
+position:absolute;
+right:10px;
+top:50%;
+transform:translateY(-50%);
+background:none;
+border:none;
+cursor:pointer;
+font-size:18px;
+}
+
+.register-btn{
+width:100%;
+padding:14px;
+background:#2563eb;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.register-btn:hover{
+background:#1d4ed8;
+transform:translateY(-2px);
+}
+
+.login-link{
+text-align:center;
+margin-top:20px;
+}
+
+.login-link a{
+color:#2563eb;
+text-decoration:none;
+font-weight:600;
+}
+
+.login-link a:hover{
+text-decoration:underline;
+}
+
+.footer{
+margin-top:25px;
+text-align:center;
+font-size:12px;
+color:#94a3b8;
+}
+
+@media(max-width:900px){
+
+.container{
+flex-direction:column;
+height:auto;
+}
+
+.left-panel{
+padding:40px;
+}
+
+.right-panel{
+width:100%;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="left-panel">
+
+<div class="logo">🚀 PrepWise AI</div>
+
+<div class="tagline">
+Create Your AI Interview Profile
+</div>
+
+<div class="description">
+Join PrepWise AI and unlock personalized interview coaching, communication analysis, emotion detection, and performance tracking to improve your placement readiness.
+</div>
+
+<div class="feature-box">
+
+<div class="feature">
+🎤 Speech Intelligence
+</div>
+
+<div class="feature">
+🧠 Smart NLP Analysis
+</div>
+
+<div class="feature">
+📊 Progress Tracking
+</div>
+
+<div class="feature">
+🏆 Interview Readiness
+</div>
+
+</div>
+
+</div>
+
+<div class="right-panel">
+
+<h2>Create Account</h2>
+
+<p class="subtitle">
+Start your interview preparation journey today.
+</p>
+
+<form method="POST">
+
+<div class="input-group">
+<label>Username</label>
+<input
+type="text"
+name="username"
+placeholder="Choose a username"
+required>
+</div>
+
+<div class="input-group">
+<label>Password</label>
+
+<div class="password-box">
+
+<input
+type="password"
+id="password"
+name="password"
+placeholder="Create password"
+required>
+
+<button
+type="button"
+onclick="togglePassword()">
+👁
+</button>
+
+</div>
+
+</div>
+
+<button
+class="register-btn"
+type="submit">
+Create Account
+</button>
+
+</form>
+
+<div class="login-link">
+Already have an account?
+<a href="/login">Login Here</a>
+</div>
+
+<div class="footer">
+© 2026 PrepWise AI • AI-Powered Interview Coaching Platform
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function togglePassword(){
+
+const pwd=document.getElementById("password");
+
+if(pwd.type==="password"){
+pwd.type="text";
+}
+else{
+pwd.type="password";
+}
+
+}
+
+</script>
+
+</body>
+</html>

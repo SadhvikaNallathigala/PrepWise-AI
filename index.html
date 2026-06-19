@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PrepWise AI | Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+min-height:100vh;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+background:#111827;
+border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:#3b82f6;
+}
+
+.nav-links{
+display:flex;
+gap:20px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-size:14px;
+}
+
+.logout-btn{
+background:#ef4444;
+padding:10px 18px;
+border-radius:10px;
+text-decoration:none;
+color:white;
+font-weight:600;
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:60px 20px;
+}
+
+.hero h1{
+font-size:52px;
+margin-bottom:15px;
+}
+
+.hero span{
+color:#3b82f6;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+color:#cbd5e1;
+font-size:18px;
+line-height:1.8;
+}
+
+/* FEATURE CARDS */
+
+.features{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px 50px;
+}
+
+.feature-card{
+background:#1e293b;
+padding:25px;
+border-radius:20px;
+text-align:center;
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-5px);
+}
+
+.feature-card h3{
+margin-top:10px;
+}
+
+/* MAIN CARD */
+
+.upload-card{
+max-width:800px;
+margin:40px auto;
+background:#1e293b;
+padding:40px;
+border-radius:25px;
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+.upload-card h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.upload-box{
+margin-bottom:25px;
+}
+
+.upload-box label{
+display:block;
+margin-bottom:10px;
+font-weight:600;
+}
+
+input[type=file]{
+width:100%;
+padding:15px;
+background:#334155;
+border:none;
+border-radius:12px;
+color:white;
+}
+
+.analyze-btn{
+width:100%;
+padding:16px;
+background:#2563eb;
+border:none;
+border-radius:12px;
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+.analyze-btn:hover{
+background:#1d4ed8;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px 50px 50px;
+}
+
+.stat-card{
+background:#1e293b;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+.stat-number{
+font-size:30px;
+font-weight:bold;
+color:#3b82f6;
+margin-top:10px;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:30px;
+color:#94a3b8;
+border-top:1px solid rgba(255,255,255,0.08);
+margin-top:30px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+🚀 PrepWise AI
+</div>
+
+<div class="nav-links">
+    <a href="#dashboard">Dashboard</a>
+    <a href="#analytics">Analytics</a>
+    <a href="#coach">Interview Coach</a>
+    <a href="#reports">Reports</a>
+</div>
+
+<a href="/logout" class="logout-btn">
+Logout
+</a>
+
+</div>
+<div id="dashboard"></div>
+<div class="hero">
+
+<h1>
+Prepare Smarter with
+<span>PrepWise AI</span>
+</h1>
+
+
+</div>
+<div id="analytics"></div>
+<div class="features">
+
+<div class="feature-card">
+<h2>🎤</h2>
+<h3>Speech Analysis</h3>
+<p>Convert interview responses into text and analyze communication quality.</p>
+</div>
+
+<div class="feature-card">
+<h2>🧠</h2>
+<h3>NLP Evaluation</h3>
+<p>Generate improved professional answers and sentiment insights.</p>
+</div>
+
+<div class="feature-card">
+<h2>😊</h2>
+<h3>Emotion Detection</h3>
+<p>Evaluate confidence and emotional expressions from video input.</p>
+</div>
+
+<div class="feature-card">
+<h2>📈</h2>
+<h3>Performance Analytics</h3>
+<p>Track progress through AI-powered scoring and visual reports.</p>
+</div>
+
+</div>
+<div id="coach"></div>
+<div class="upload-card">
+
+<h2>📤 Upload Interview Recording</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="upload-box">
+<label>🎤 Upload Audio File</label>
+<input type="file" name="audio" required>
+</div>
+
+<div class="upload-box">
+<label>🎥 Upload Video File</label>
+<input type="file" name="video" required>
+</div>
+
+<button class="analyze-btn" type="submit">
+🚀 Analyze Interview Performance
+</button>
+
+</form>
+
+</div>
+<div id="reports"></div>
+<div class="stats">
+
+<div class="stat-card">
+<h3>AI Modules</h3>
+<div class="stat-number">4</div>
+</div>
+
+<div class="stat-card">
+<h3>Analysis Types</h3>
+<div class="stat-number">6+</div>
+</div>
+
+<div class="stat-card">
+<h3>Core Technologies</h3>
+<div class="stat-number">7</div>
+</div>
+
+<div class="stat-card">
+<h3>Interview Insights</h3>
+<div class="stat-number">100%</div>
+</div>
+
+</div>
+
+<div class="footer">
+
+PrepWise AI © 2026
+<p>Sadhvika Nallathigala</p> 
+
+
+</div>
+
+</body>
+</html>
