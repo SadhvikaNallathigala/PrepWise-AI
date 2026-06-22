@@ -179,14 +179,23 @@ def interview_analysis():
 
             return render_template(
                 "result.html",
-                text=text,
-                improved_text=improved_text,
                 sentiment=sentiment,
                 emotion=emotion,
                 confidence=confidence,
                 eye_contact=eye_contact,
-                score=final_score
+                score=final_score,
+                text=text,
+                improved_text=improved_text,
+
+                software_score=88,
+                data_score=79,
+                ml_score=84,
+                frontend_score=76,
+                backend_score=81
             )
+
+
+        
 
         except Exception as e:
             print("ERROR:", e)
