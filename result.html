@@ -7,7 +7,7 @@
 
 <title>PrepWise AI | Analysis Results</title>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -232,15 +232,6 @@ height:100%;
 border-radius:20px;
 }
 
-/* GRAPH SECTION */
-
-.graph-card{
-background:#1e293b;
-padding:25px;
-border-radius:20px;
-margin-bottom:30px;
-height:450px;
-}
 
 /* FEEDBACK */
 
@@ -284,6 +275,50 @@ grid-template-columns:1fr;
 
 }
 
+.industry-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:20px;
+}
+
+.industry-card{
+background:#0f172a;
+padding:25px;
+border-radius:20px;
+text-align:center;
+}
+
+.industry-card h3{
+margin-top:15px;
+font-size:18px;
+color:white;
+}
+
+.mini-circle{
+width:140px;
+height:140px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+}
+
+.mini-inner{
+width:105px;
+height:105px;
+border-radius:50%;
+background:#1e293b;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+font-weight:700;
+color:white;
+}
+
+
 </style>
 
 </head>
@@ -306,9 +341,7 @@ Logout
 
 <h1>Interview Performance Report</h1>
 
-<p>
-AI-Powered Multi-Modal Interview Analysis
-</p>
+
 
 </div>
 
@@ -498,17 +531,66 @@ style="width:82%; background:#8b5cf6;">
 
 </div>
 
-<!-- PERFORMANCE GRAPH -->
+<div class="breakdown">
 
-<div class="graph-card">
+<div class="breakdown">
 
-<h2 style="margin-bottom:20px;">
-📈 Performance Analytics
-</h2>
+<div class="breakdown">
 
-<canvas id="performanceChart"></canvas>
+<h2>🎯 Industry Readiness Assessment</h2>
+
+<p style="color:#94a3b8;margin-bottom:30px;">
+Based on communication quality, confidence, sentiment,
+emotion analysis and overall interview performance.
+</p>
+
+<div class="industry-grid">
+
+<div class="industry-card">
+<div class="mini-circle software"
+     style="background:conic-gradient(#3b82f6 {{ software_score }}%, #334155 0%)">
+    <div class="mini-inner">{{ software_score }}%</div>
+</div>
+<h3>Software Engineer</h3>
+</div>
+
+<div class="industry-card">
+<div class="mini-circle data"
+     style="background:conic-gradient(#10b981 {{ data_score }}%, #334155 0%)">
+    <div class="mini-inner">{{ data_score }}%</div>
+</div>
+<h3>Data Analyst</h3>
+</div>
+
+<div class="industry-card">
+<div class="mini-circle ml"
+     style="background:conic-gradient(#8b5cf6 {{ ml_score }}%, #334155 0%)">
+    <div class="mini-inner">{{ ml_score }}%</div>
+</div>
+<h3>ML Engineer</h3>
+</div>
+
+<div class="industry-card">
+<div class="mini-circle frontend"
+     style="background:conic-gradient(#f59e0b {{ frontend_score }}%, #334155 0%)">
+    <div class="mini-inner">{{ frontend_score }}%</div>
+</div>
+<h3>Frontend Developer</h3>
+</div>
+
+<div class="industry-card">
+<div class="mini-circle backend"
+     style="background:conic-gradient(#ef4444 {{ backend_score }}%, #334155 0%)">
+    <div class="mini-inner">{{ backend_score }}%</div>
+</div>
+<h3>Backend Developer</h3>
+</div>
 
 </div>
+
+</div>
+
+
 
 <!-- INTERVIEW READINESS -->
 
@@ -576,95 +658,6 @@ font-weight:600;
 
 
 </div>
-
-<!-- CHART.JS -->
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(){
-
-const finalScore = {{ (score * 100)|round(0)|int }};
-
-new Chart(
-document.getElementById("performanceChart"),
-{
-type:'line',
-
-data:{
-
-labels:[
-'Attempt 1',
-'Attempt 2',
-'Attempt 3',
-'Current'
-],
-
-datasets:[{
-
-label:'Performance Score',
-
-data:[
-55,
-68,
-74,
-finalScore
-],
-
-borderColor:'#3b82f6',
-backgroundColor:'rgba(59,130,246,0.2)',
-fill:true,
-tension:0.4,
-borderWidth:3
-
-}]
-
-},
-
-options:{
-
-responsive:true,
-
-plugins:{
-legend:{
-labels:{
-color:'white'
-}
-}
-},
-
-scales:{
-
-x:{
-ticks:{
-color:'white'
-},
-grid:{
-color:'rgba(255,255,255,0.08)'
-}
-},
-
-y:{
-beginAtZero:true,
-max:100,
-
-ticks:{
-color:'white'
-},
-
-grid:{
-color:'rgba(255,255,255,0.08)'
-}
-}
-
-}
-
-}
-
-});
-
-});
-
-</script>
 
 </body>
 </html>
